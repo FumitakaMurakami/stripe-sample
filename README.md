@@ -5,11 +5,15 @@
 npm install
 ```
 
+### DBビルド
+```
+npm run db:build
+```
+
 ### クライアント
 ```
 npm run c:dev
 ```
-
 
 ### サーバー立ち上げ
 ```
