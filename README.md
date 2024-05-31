@@ -5,9 +5,15 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### クライアント
 ```
-npm run serve
+npm run c:dev
+```
+
+
+### サーバー立ち上げ
+```
+npm run s:dev
 ```
 
 ### Compiles and minifies for production
