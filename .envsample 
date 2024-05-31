@@ -1,0 +1,5 @@
+STRIPE_SECRET_KEY=your_stripe_secret_key
+VUE_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
+FREE_PLAN_PRICE_ID=your_free_plan_price_id
+STANDARD_PLAN_PRICE_ID=your_standard_plan_price_id
+ENTERPRISE_PLAN_PRICE_ID=your_enterprise_plan_price_id
