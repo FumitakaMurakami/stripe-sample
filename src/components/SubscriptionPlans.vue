@@ -26,7 +26,7 @@ export default {
       const response = await fetch('http://localhost:3000/plans');
       const data = await response.json();
       this.plans = data.plans;
-      
+
       const userId = this.$route.params.userId;
       const userResponse = await fetch(`http://localhost:3000/user/${userId}`);
       const userData = await userResponse.json();
@@ -39,15 +39,15 @@ export default {
   methods: {
     async handleCheckout(priceId) {
       try {
-        const user = JSON.parse(localStorage.getItem('user'));
-
+        const userId = this.$route.params.userId;
+        
         if (priceId === 'price_free') {
           const response = await fetch('http://localhost:3000/change-plan', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ userId: user.id, priceId })
+            body: JSON.stringify({ userId, priceId })
           });
 
           if (!response.ok) {
@@ -56,21 +56,23 @@ export default {
 
           const data = await response.json();
           alert(data.message);
+          
+          // プランの再取得
           const planResponse = await fetch('http://localhost:3000/plans');
           const planData = await planResponse.json();
           this.plans = planData.plans;
           
-          const userId = this.$route.params.userId;
+          // ユーザー情報の再取得
           const userResponse = await fetch(`http://localhost:3000/user/${userId}`);
           const userData = await userResponse.json();
-          this.userPriceId = userData.plan_id;
+          this.userPriceId = userData.price_id;
         } else {
           const response = await fetch('http://localhost:3000/create-checkout-session', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ priceId, userId: user.id })
+            body: JSON.stringify({ priceId, userId })
           });
 
           if (!response.ok) {

@@ -1,15 +1,15 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // 環境変数からシークレットキーを読み込む
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const db = require('./database'); // データベースのインポート
+const db = require('./database');
 
 app.use(bodyParser.json());
 
 // CORS設定
-const allowedOrigins = ['http://localhost:8081'];
+const allowedOrigins = ['http://localhost:6235', 'http://172.20.10.5:6235'];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin (like mobile apps or curl requests)
@@ -58,8 +58,8 @@ app.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'subscription',
-    success_url: `http://localhost:8081/success?session_id={CHECKOUT_SESSION_ID}&user_id=${userId}&price_id=${priceId}`,
-    cancel_url: 'http://localhost:8081/cancel',
+    success_url: `http://localhost:6235/success?session_id={CHECKOUT_SESSION_ID}&user_id=${userId}&price_id=${priceId}`,
+    cancel_url: 'http://localhost:6235/cancel',
   });
 
   res.json({ id: session.id });
